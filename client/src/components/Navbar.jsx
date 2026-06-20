@@ -24,7 +24,7 @@ function Navbar() {
     <nav className="bg-white dark:bg-gray-800 shadow-md transition-colors duration-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-black dark:text-white">
-          Imaginary Store
+          Store
         </Link>
         
         <div className="flex items-center space-x-4">
