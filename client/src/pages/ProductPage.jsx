@@ -14,20 +14,22 @@ function ProductPage() {
   const [error, setError] = useState(null)
   const [qty, setQty] = useState(1)
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        setLoading(true)
-        const { data } = await axios.get(`http://localhost:5000/api/products/${id}`)
-        setProduct(data)
-      } catch (err) {
-        setError('Product not found')
-      } finally {
-        setLoading(false)
-      }
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      setLoading(true)
+      const { data } = await axios.get(`${API_URL}/api/products/${id}`)
+      setProduct(data)
+    } catch (err) {
+      setError('Product not found')
+    } finally {
+      setLoading(false)
     }
-    fetchProduct()
-  }, [id])
+  }
+  fetchProduct()
+}, [id])
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }))

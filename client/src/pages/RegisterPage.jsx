@@ -27,8 +27,9 @@ function RegisterPage() {
       try {
         setError(null)
         // Use /api/users if you did Option 2 refactor, or /api/users/register if you kept Option 1
-        const { data } = await axios.post('http://localhost:5000/api/users', { name, email, password })
-        dispatch(setCredentials(data))
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+const { data } = await axios.post(`${API_URL}/api/users`, { name, email, password })
       } catch (err) {
         setError(err.response?.data?.message || 'Registration failed')
       }

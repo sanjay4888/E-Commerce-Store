@@ -21,7 +21,9 @@ function LoginPage() {
     e.preventDefault()
     try {
       setError(null)
-      const { data } = await axios.post('http://localhost:5000/api/users/login', { email, password })
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+const { data } = await axios.post(`${API_URL}/api/users/login`, { email, password })
       dispatch(setCredentials(data))
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed')

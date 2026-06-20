@@ -17,12 +17,14 @@ function HomePage() {
   const [data, setData] = useState({ products: [], page: 1, pages: 1 })
   const [loading, setLoading] = useState(true)
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true)
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/products?keyword=${keyword}&sort=${sort}&pageNumber=${pageNumber}`
+          `${API_URL}/api/products?keyword=${keyword}&sort=${sort}&pageNumber=${pageNumber}`
         )
         setData(data)
       } catch (error) {
@@ -32,7 +34,7 @@ function HomePage() {
     }
     fetchProducts()
   }, [keyword, sort, pageNumber])
-
+  
   const submitHandler = (e) => {
     e.preventDefault()
     navigate(`/?keyword=${searchTerm}&sort=${sortOption}&pageNumber=1`)
