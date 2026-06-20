@@ -9,7 +9,13 @@ dotenv.config()
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://e-commerce-store4.netlify.app'
+  ],
+  credentials: true
+}))
 app.use(express.json())
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
